@@ -9,3 +9,5 @@ CREATE TABLE animals (
     weight_kg DECIMAL
 
 );
+
+ALTER TABLE animals ADD COLUMN species TEXT;
