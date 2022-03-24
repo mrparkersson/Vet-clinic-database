@@ -74,4 +74,30 @@ FROM animals
 GROUP BY species, date_of_birth
 HAVING date_of_birth BETWEEN '1990-01-01' AND '2000-01-01';
 
+SELECT name FROM animals JOIN owners ON animals.owner_id = owners.id WHERE owners.id = 4;
 
+-- pokemon animals list
+
+SELECT animals.name, animals.species_id, species.name FROM animals JOIN species ON animals.species_id = species.id WHERE species.id = 1;
+
+-- owners and their animals
+
+SELECT * FROM owners LEFT JOIN animals ON animals.owner_id = owners.id;
+
+-- total animasl per species
+
+SELECT species.name, COUNT(animals.species_id) FROM animals JOIN species ON animals.species_id = species.id GROUP BY species.name;
+
+-- List of all Digimon owned by Jennifer Orwell.
+
+SELECT owners.full_name, animals.species_id, animals.name AS pokemon FROM animals
+JOIN owners ON animals.owner_id = owners.id
+WHERE owners.id = 2 AND animals.species_id = 2;
+
+-- animals owned by dean winchester 
+SELECT * FROM animals JOIN owners ON animals.owner_id = owners.id WHERE animals.owner_id = 5 AND animals.escape_attempts = 1;
+
+-- list of owners with most animals
+
+SELECT owners.full_name, COUNT(animals.owner_id) AS total_animals FROM animals
+JOIN owners ON animals.owner_id = owners.id GROUP BY owners.full_name ORDER BY COUNT(*) DESC;
